@@ -1,0 +1,20 @@
+# This is a comment. Each line below ignores a specific folder or file type.
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]serSettings/
+
+# MemoryCaptures can also get very large
+[Mm]emoryCaptures/
+
+# Visual Studio / VS Code cache files
+.vs/
+.vscode/
+*.csproj
+*.sln
+*.suo
+*.user
+*.userprefs
