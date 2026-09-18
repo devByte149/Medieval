@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -10,28 +12,19 @@ public class PlayerController2D : MonoBehaviour
 
     void Start()
     {
-        // Automatically grab the Rigidbody2D component attached to the Player
+        // Gets rigidbody component and sets gravity scaling to 0 since game is top-down
         rb = GetComponent<Rigidbody2D>();
-        
-        // Ensure gravity doesn't pull your top-down character downward
-        rb.gravityScale = 0f; 
+        rb.gravityScale = 0;
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
     void Update()
     {
-        // GetRawAxis gives crisp stops and starts without the "ice-skating" slide effect
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
-
-        // Normalizing ensures diagonal movement isn't faster than moving straight
-        movement = movement.normalized;
-        Debug.Log("movement:" + movement);
-        Debug.Log("input:" + Input.inputString);
+        // Main movement logic -- TODO: Move to main logic loop later
+        transform.position += new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0) * moveSpeed * Time.deltaTime;
     }
 
     void FixedUpdate()
     {
-        // Apply the movement to the physics body during the physics step
-        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
     }
 }
